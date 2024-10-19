@@ -1,6 +1,4 @@
 import unittest
-from flask import Flask
-from flask.testing import FlaskClient
 from app import create_app
 
 # test_user_controller.py
@@ -21,7 +19,7 @@ class TestUserController(unittest.TestCase):
         response = self.client.post('/api/users', json={
             'firstname': 'John',
             'lastname': 'Doe',
-            'email': 'john.doe1@example.com',
+            'email': 'john.doe3@example.com',
             'phone': '1234567890',
             'age': 25,
             'password': 'password123'
