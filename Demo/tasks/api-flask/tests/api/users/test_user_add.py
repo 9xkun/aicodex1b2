@@ -3,7 +3,7 @@ from app import create_app
 
 # test_user_controller.py
 
-class TestUserController(unittest.TestCase):
+class TestUserAdd(unittest.TestCase):
     def setUp(self):
         # python server
         self.app = create_app()

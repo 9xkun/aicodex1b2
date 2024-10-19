@@ -1,7 +1,7 @@
 import unittest
 from app.utils.validate_string import ValidateString
 
-class TestUserController(unittest.TestCase):
+class TestValidateEmail(unittest.TestCase):
 
     def test_validate_email_format_valid_email(self):
         self.assertTrue(ValidateString.validate_email_format('test@example.com'))
