@@ -27,6 +27,29 @@ function isIncremental(input) {
 
 exports.isIncremental = isIncremental;
 
+// TODO: Define or import the operations object
+const parseAndValidateOperands = (a, b) => {
+    const intA = parseInt(a, 10);
+    const intB = parseInt(b, 10);
+
+    if (isNaN(intA) || isNaN(intB)) {
+        throw new Error('Operands must be integers');
+    }
+
+    return { intA, intB };
+};
+
+const operations = {
+  add: (a, b) => {
+    const { intA, intB } = parseAndValidateOperands(a, b);
+    return intA + intB;
+  },
+  subtract: (a, b) => {
+    const { intA, intB } = parseAndValidateOperands(a, b);
+    return intA - intB;
+  },
+};
+
 exports.calculate = function(req, res) {
   req.app.use(function(err, _req, res, next) {
     if (res.headersSent) {
@@ -58,6 +81,7 @@ exports.calculate = function(req, res) {
     throw new Error("Invalid operand2: " + req.query.operand2);
   }
 
+  console.log("Operand1: " + req.query.operand1);
+  console.log("Operand2: " + req.query.operand2);
   res.json({ result: operation(req.query.operand1, req.query.operand2) });
 };
-

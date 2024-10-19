@@ -128,7 +128,7 @@ describe('Arithmetic', function () {
                     done();
                 });
         });
-        it('subtracts an integer from a floating point number', function (done) {
+        it('subtracts a floating point number from an integer', function (done) {
             request.get('/arithmetic?operation=subtract&operand1=2.5&operand2=-5')
                 .expect(200)
                 .end(function (err, res) {
