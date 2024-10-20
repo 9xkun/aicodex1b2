@@ -1,8 +1,9 @@
 from flask import Flask
-from app.blueprints.user_blueprint import user_bp
+from app.users.user_blueprint import user_bp
 from flask_migrate import Migrate
-from flask_sqlalchemy import SQLAlchemy
 from app.database import db
+from app.users.userweb_controller import UserWebController
+from flask_cors import CORS
 
 migrate = Migrate()
 
@@ -17,10 +18,16 @@ def create_app(config=None):
 
     db.init_app(app)
     migrate.init_app(app, db)
+    CORS(app)
 
     app.register_blueprint(user_bp, url_prefix='/api/users')
 
     with app.app_context():
         db.create_all()
 
+
+    @app.route('/users')
+    def list_users():
+        return UserWebController.list_users()
+    
     return app
