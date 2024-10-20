@@ -1,0 +1,20 @@
+{
+  "name": "Flask CRUD App Dev Container",
+  "build": {
+    "dockerfile": "prod.Dockerfile",
+    "context": ".."
+  },
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "ms-python.python",
+    "ms-python.vscode-pylance"
+  ],
+  "postCreateCommand": "pip install -r requirements.txt -r test_requirements.txt",
+  "runArgs": ["--env-file", ".env"],
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/app,type=bind"
+  ],
+  "remoteUser": "vscode"
+}

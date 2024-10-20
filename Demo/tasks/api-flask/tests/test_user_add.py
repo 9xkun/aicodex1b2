@@ -1,12 +1,20 @@
 import unittest
 from app import create_app
+from flask_sqlalchemy import SQLAlchemy
+import tempfile
+import os
 
 # test_user_controller.py
 
 class TestUserAdd(unittest.TestCase):
     def setUp(self):
         # python server
-        self.app = create_app()
+        # Create a temporary database for testing
+        config = {
+            'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:',
+            'TESTING': True
+        }
+        self.app = create_app(config=config)
 
         # python browser
         self.client = self.app.test_client()
@@ -19,7 +27,7 @@ class TestUserAdd(unittest.TestCase):
         response = self.client.post('/api/users', json={
             'firstname': 'John',
             'lastname': 'Doe',
-            'email': 'john.doe3@example.com',
+            'email': 'john.doe@example.com',
             'phone': '1234567890',
             'age': 25,
             'password': 'password123'
