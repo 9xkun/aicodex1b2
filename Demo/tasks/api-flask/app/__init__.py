@@ -19,13 +19,17 @@ def create_app(config=None):
     db.init_app(app)
     migrate.init_app(app, db)
     CORS(app)
+    # add swagger
 
-    app.register_blueprint(user_bp, url_prefix='/api/users')
-
+    # create tables
     with app.app_context():
         db.create_all()
 
+    app.register_blueprint(user_bp, url_prefix='/api')
 
+    # TODO: support also with / or without
+
+    # TODO: move to router
     @app.route('/users')
     def list_users():
         return UserWebController.list_users()

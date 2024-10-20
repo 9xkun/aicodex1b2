@@ -39,7 +39,8 @@ class UserController:
 
         # 4. age should be between 0 and 100
         age = data.get('age')
-        if age and (age < 0 or age > 100):
+        ageInt = int(age)
+        if ageInt and (ageInt < 0 or ageInt > 100):
             return jsonify({'message': 'Age should be between 0 and 100'}), 400
         
         # 5. validate password length >= 6

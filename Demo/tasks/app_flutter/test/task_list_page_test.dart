@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:app_flutter/task_list_page.dart';
+import 'task_list_page_test.mocks.dart';
 
 @GenerateMocks([http.Client])
 void main() {

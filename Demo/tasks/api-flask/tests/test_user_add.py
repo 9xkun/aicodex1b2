@@ -3,6 +3,7 @@ from app import create_app
 from flask_sqlalchemy import SQLAlchemy
 import tempfile
 import os
+from app.database import db
 
 # test_user_controller.py
 
@@ -21,7 +22,8 @@ class TestUserAdd(unittest.TestCase):
         self.app.testing = True
 
     def tearDown(self):
-        pass
+        with self.app.app_context():
+            db.drop_all()
 
     def test_create_user_valid(self):
         response = self.client.post('/api/users', json={
@@ -31,7 +33,7 @@ class TestUserAdd(unittest.TestCase):
             'phone': '1234567890',
             'age': 25,
             'password': 'password123'
-        }, follow_redirects=True)
+        })
         self.assertEqual(response.status_code, 201)
         self.assertIn('id', response.get_json())
 
@@ -42,7 +44,7 @@ class TestUserAdd(unittest.TestCase):
             'phone': '1234567890',
             'age': 25,
             'password': 'password123'
-        }, follow_redirects=True)
+        })
         self.assertEqual(response.status_code, 400)
         self.assertIn('Email is required', response.get_json()['message'])
 
